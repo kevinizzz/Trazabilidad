@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventario Zootécnico Pro</title>
+  <link rel="stylesheet" href="styleintfinca.css">
+</head>
+
+<body>
+
+  <header class="encabezado" id="headerMain">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span id="headerIcono" style="font-size:24px;">🐖</span>
+      <h2 id="headerTitulo">Porcinos</h2>
+    </div>
+    <div id="totalRegistros">Total: 0</div>
+  </header>
+
+  <main class="contenedor">
+    <div class="buscador-full-width">
+      <div class="buscador-centrado">
+        <input type="text" id="inputBuscar" placeholder="Buscar por código o nombre...">
+      </div>
+    </div>
+
+    <div class="tabla-contenedor">
+      <table>
+        <thead id="tablaHeader"></thead>
+        <tbody id="tablaCuerpo"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <button class="fab" id="mainFab" onclick="abrirModal()">+</button>
+
+  <nav class="navbar">
+    <div class="nav-item activo" data-cat="Porcinos" data-icon="🐖">
+      <span class="icono">🐖</span> <span class="texto">Porcinos</span>
+    </div>
+    <div class="nav-item" data-cat="Aves" data-icon="🐔">
+      <span class="icono">🐔</span> <span class="texto">Aves</span>
+    </div>
+    <div class="nav-item" data-cat="Ovinos" data-icon="🐑">
+      <span class="icono">🐑</span> <span class="texto">Ovinos</span>
+    </div>
+    <div class="nav-item" data-cat="Caprinos" data-icon="🐐">
+      <span class="icono">🐐</span> <span class="texto">Caprinos</span>
+    </div>
+    <div class="nav-item" data-cat="Bovinos" data-icon="🐄">
+      <span class="icono">🐄</span> <span class="texto">Bovinos</span>
+    </div>
+  </nav>
+
+  <div id="modal" class="modal oculto">
+    <div class="modal-contenido">
+      <h3 id="modalTitulo">Nuevo Registro</h3>
+      <div class="formulario" id="formularioCuerpo"></div>
+      <div class="acciones-modal">
+        <button class="btn-guardar" onclick="guardarRegistro()">Guardar</button>
+        <button class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

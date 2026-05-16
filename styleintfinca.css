@@ -1,0 +1,223 @@
+/* =========================================
+   1. VARIABLES Y RESET
+   ========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #f4f4f4;
+  padding-bottom: 90px;
+}
+
+/* =========================================
+   2. HEADER Y BUSCADOR (STICKY)
+   ========================================= */
+.encabezado {
+  background: var(--color-tema, #e57373); 
+  color: white;
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 15px var(--color-sombra, rgba(229, 115, 115, 0.3));
+  transition: all 0.3s ease;
+}
+
+.contenedor { 
+  padding: 0; 
+}
+
+.buscador-full-width {
+  position: sticky;
+  top: 80px; /* Ajusta este valor si tu header es más alto por el padding de 25px */
+  z-index: 95;
+  background: #f4f4f4; 
+  width: 100%; 
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  margin-top: -1px;
+}
+
+.buscador-centrado {
+  margin: 0;
+  padding: 10px 16px;
+}
+
+/* CORRECCIÓN: Eliminé la duplicidad de .buscador-centrado que tenía estilos de input */
+.buscador-centrado input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 15px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  outline: none;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.buscador-centrado input:focus {
+  border-color: var(--color-tema, #e57373);
+  box-shadow: 0 2px 10px var(--color-sombra, rgba(229, 115, 115, 0.2));
+}
+
+/* =========================================
+   3. TABLA RESPONSIVE Y ENCABEZADOS STICKY
+   ========================================= */
+.tabla-contenedor {
+  background: white;
+  border-radius: 15px;
+  /* IMPORTANTE: Cambiamos overflow-x a auto y quitamos overflow: visible */
+  overflow-x: auto; 
+  margin: 10px 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  /* Esto asegura que el borde redondeado no se rompa al scrollear */
+  border: 1px solid #eee;
+}
+
+table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: separate; /* Cambiado de collapse a separate para manejar mejor el sticky */
+  border-spacing: 0;
+}
+
+thead th {
+  position: sticky;
+  top: 145px; 
+  background-color: #f8f9fa; 
+  z-index: 2; /* Por debajo del buscador pero sobre los TD */
+  text-align: left;
+  padding: 15px 12px;
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+  border-bottom: 2px solid #eee;
+  /* Sombra para que no se vea transparente al pasar datos */
+  box-shadow: 0 2px 2px -1px rgba(0,0,0,0.1);
+}
+
+/* Evita que los datos se vean por encima del encabezado */
+td {
+  padding: 15px 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  background: white;
+  position: relative;
+  z-index: 1;
+}
+
+/* Estilo para los botones de acción dentro de la tabla */
+.acciones {
+  display: flex;
+  gap: 5px;
+}
+
+/* =========================================
+   4. ELEMENTOS FLOTANTES Y NAVBAR
+   ========================================= */
+.fab {
+  position: fixed;
+  bottom: 95px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--color-tema, #e57373);
+  color: white;
+  font-size: 30px;
+  border: none;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.fab:active {
+  transform: scale(0.9);
+}
+
+.navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 75px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0 -3px 10px rgba(0,0,0,0.1);
+  z-index: 110; /* Por encima de todo */
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  color: #999;
+  cursor: pointer;
+  padding: 10px 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-item.activo {
+  border-radius: 25px;
+  font-weight: bold;
+  /* El color y fondo se manejan por JS dinámicamente */
+}
+
+.nav-item .texto { display: none; margin-left: 8px; }
+.nav-item.activo .texto { display: inline; }
+
+/* =========================================
+   5. MODAL Y FORMULARIO
+   ========================================= */
+.modal {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 200; /* Siempre al frente */
+}
+
+.oculto { display: none; }
+
+.modal-contenido {
+  background: white;
+  width: 90%;
+  max-width: 450px;
+  border-radius: 20px;
+  padding: 25px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.campo { margin-bottom: 15px; display: flex; flex-direction: column; }
+.campo label { font-size: 13px; color: #666; margin-bottom: 5px; }
+.formulario input, .formulario select {
+  padding: 12px; border-radius: 10px; border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.acciones-modal { display: flex; gap: 10px; margin-top: 20px; }
+.acciones-modal button { 
+  flex: 1; 
+  padding: 12px; 
+  border: none; 
+  border-radius: 10px; 
+  cursor: pointer; 
+  color: white; 
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+
+.acciones-modal button:active { opacity: 0.8; }
+.btn-guardar { background: #4CAF50; }
+.btn-cancelar { background: #888; }
